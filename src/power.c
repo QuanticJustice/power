@@ -8,7 +8,7 @@ double power( double base, double exponent )
 	double rv = pow( base, exponent );
 	prettyprint( (int) rv );
 
-   printf( "POWER: VERSION 1.0.0\n" );
+   printf( "POWER: VERSION 2.0.0\n" );
 
 	return rv;
 }
