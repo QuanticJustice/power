@@ -30,8 +30,8 @@ message( "project_prettyprint install_dir retrieved as " ${install_dir} )
 
 # just need the include, there is no linking between libraries (i.e. this is not an application)
 include_directories( 
-   ${power_SOURCE_DIR}/build/src/project_prettyprint-prefix/src/project_prettyprint/inc
-   ${power_SOURCE_DIR}/include
+   ${PROJECT_SOURCE_DIR}/build/src/project_prettyprint-prefix/src/project_prettyprint/inc
+   ${PROJECT_SOURCE_DIR}/include
 )
 
 add_library( power STATIC power.c )
@@ -41,5 +41,5 @@ target_link_libraries( power m )
 add_dependencies( power project_prettyprint )
 
 # install the targets to specific directories
-install( TARGETS power DESTINATION ${power_SOURCE_DIR}/lib )
-install( FILES ${power_SOURCE_DIR}/include/power.h DESTINATION ${power_SOURCE_DIR}/inc )
+install( TARGETS power DESTINATION ${PROJECT_SOURCE_DIR}/lib )
+install( FILES ${PROJECT_SOURCE_DIR}/include/power.h DESTINATION ${PROJECT_SOURCE_DIR}/inc )
