@@ -12,6 +12,7 @@ ExternalProject_Add(
    project_prettyprint
    GIT_REPOSITORY https://github.com/QuanticJustice/prettyprint.git
    GIT_TAG master
+   INSTALL_COMMAND make install
 )
 
 # TODO: need to figure out how to pass env variable in so that GIT_TAG can point to specific version (tag)
@@ -24,15 +25,23 @@ ExternalProject_Add(
 #include_directories("${squareroot_SOURCE_DIR}/include"
 #	"${squareroot_SOURCE_DIR}/../prettyprint/include")
 
-ExternalProject_Get_Property( project_prettyprint install_dir )
-
-message( "project_prettyprint install_dir retrieved as " ${install_dir} )
+# retrieve the SOURCE_DIR for the external project as it will be stored within
+# the current build directory
+ExternalProject_Get_Property( project_prettyprint SOURCE_DIR )
+message( "project_prettyprint SOURCE_DIR retrieved as " ${SOURCE_DIR} )
+set( PRETTY_PRINT_SOURCE_DIR ${SOURCE_DIR} )
+message( "PRETTY_PRINT_SOURCE_DIR is " ${PRETTY_PRINT_SOURCE_DIR} )
 
 # just need the include, there is no linking between libraries (i.e. this is not an application)
-include_directories( 
-   ${PROJECT_SOURCE_DIR}/build/src/project_prettyprint-prefix/src/project_prettyprint/inc
+include_directories(
+   ${PRETTY_PRINT_SOURCE_DIR}/inc
    ${PROJECT_SOURCE_DIR}/include
 )
+
+#include_directories( 
+#   ${PROJECT_SOURCE_DIR}/build/src/project_prettyprint-prefix/src/project_prettyprint/inc
+#   ${PROJECT_SOURCE_DIR}/include
+#)
 
 add_library( power STATIC power.c )
 
